@@ -6,7 +6,6 @@ import 'package:chat_app_v3/models/chat_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../api/apis.dart';
 import '../main.dart';
 
 class ViewProfileScreen extends StatefulWidget {
@@ -88,7 +87,7 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'About:',
+                      'Giới thiệu:',
                       style: TextStyle(
                           color: Colors.black87,
                           fontWeight: FontWeight.w500,

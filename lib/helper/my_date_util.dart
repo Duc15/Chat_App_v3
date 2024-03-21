@@ -64,41 +64,41 @@ class MyDateUtil {
     }
 
     if ((now.difference(time).inHours / 24).round() == 1) {
-      return 'Last seen yesterday at $formattedTime';
+      return 'Hoạt động lần cuối $formattedTime';
     }
 
     String month = _getMonth(time);
-
-    return 'Last seen on ${time.day} $month on $formattedTime';
+    return 'Hoạt động lần cuối ${time.day} $month';
+    //return 'Hoạt động gần nhất vào ${time.day} $month lúc $formattedTime';
   }
 
   // get month name from month no. or index
   static String _getMonth(DateTime date) {
     switch (date.month) {
       case 1:
-        return 'Jan';
+        return 'Tháng 1';
       case 2:
-        return 'Feb';
+        return 'Tháng 2';
       case 3:
-        return 'Mar';
+        return 'Tháng 3';
       case 4:
-        return 'Apr';
+        return 'Tháng 4';
       case 5:
-        return 'May';
+        return 'Tháng 5';
       case 6:
-        return 'Jun';
+        return 'Tháng 6';
       case 7:
-        return 'Jul';
+        return 'Tháng 7';
       case 8:
-        return 'Aug';
+        return 'Tháng 8';
       case 9:
-        return 'Sept';
+        return 'Tháng 9';
       case 10:
-        return 'Oct';
+        return 'Tháng 10';
       case 11:
-        return 'Nov';
+        return 'Tháng 11';
       case 12:
-        return 'Dec';
+        return 'Tháng 12';
     }
     return 'NA';
   }

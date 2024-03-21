@@ -4,14 +4,15 @@ import 'dart:io';
 import 'package:chat_app_v3/helper/dialogs.dart';
 import 'package:chat_app_v3/screen/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../api/apis.dart';
 import '../../main.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({
+    super.key,
+  });
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -66,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return await APIs.auth.signInWithCredential(credential);
     } catch (e) {
       log('\n_signInWithGoogle: $e');
-      Dialogs.showSnackbar(context, 'Something went wrong');
+      Dialogs.showSnackbar(context, 'Xảy ra lỗi gì đó rùi');
       return null;
     }
   }

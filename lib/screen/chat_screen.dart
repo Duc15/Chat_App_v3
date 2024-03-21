@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_app_v3/helper/my_date_util.dart';
 import 'package:chat_app_v3/models/chat_user.dart';
+import 'package:chat_app_v3/screen/landing_page.dart';
 import 'package:chat_app_v3/screen/view_profile_screen.dart';
 import 'package:chat_app_v3/widgets/message_card.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
@@ -31,6 +32,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: SafeArea(
+        // ignore: deprecated_member_use
         child: WillPopScope(
           onWillPop: () {
             if (_showEmoji) {
@@ -137,7 +139,7 @@ class _ChatScreenState extends State<ChatScreen> {
         child: StreamBuilder(
           stream: APIs.getUserInfo(widget.user),
           builder: (context, snapshot) {
-            final data = snapshot.data!.docs;
+            final data = snapshot.data?.docs;
             final list =
                 data?.map((e) => ChatUser.fromJson(e.data())).toList() ?? [];
 
@@ -153,6 +155,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     color: Colors.black54,
                   ),
                 ),
+
                 //change profile pic
                 ClipRRect(
                   borderRadius: BorderRadius.circular(mq.height * .3),
@@ -184,10 +187,11 @@ class _ChatScreenState extends State<ChatScreen> {
                     const SizedBox(
                       height: 2,
                     ),
+
                     Text(
                       list.isNotEmpty
                           ? list[0].isOnline
-                              ? 'Trực tuyến'
+                              ? 'Trực tuyến                                     '
                               : MyDateUtil.getLastActiveTime(
                                   context: context,
                                   lastActive: list[0].lastActive)
@@ -200,6 +204,26 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     ),
                   ],
+                ),
+
+                //call button
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.call,
+                    color: Colors.black54,
+                  ),
+                ),
+                //videocall button
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => const LandingPage()));
+                  },
+                  icon: const Icon(
+                    Icons.video_call,
+                    color: Colors.black54,
+                  ),
                 ),
               ],
             );
@@ -317,7 +341,7 @@ class _ChatScreenState extends State<ChatScreen> {
             shape: const CircleBorder(),
             padding:
                 const EdgeInsets.only(top: 10, bottom: 10, right: 5, left: 10),
-            color: Colors.green,
+            color: Colors.blue,
             minWidth: 0,
             child: const Icon(
               Icons.send,

@@ -51,8 +51,8 @@ class _MessageCardState extends State<MessageCard> {
             margin: EdgeInsets.symmetric(
                 horizontal: mq.width * .04, vertical: mq.height * .01),
             decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 221, 245, 255),
-                border: Border.all(color: Colors.lightBlue),
+                color: Colors.grey.shade200,
+                border: Border.all(color: Colors.grey.shade200),
                 //making borders curved
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(30),
@@ -131,8 +131,9 @@ class _MessageCardState extends State<MessageCard> {
             margin: EdgeInsets.symmetric(
                 horizontal: mq.width * .04, vertical: mq.height * .01),
             decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 218, 255, 176),
-                border: Border.all(color: Colors.lightGreen),
+                color: const Color.fromARGB(255, 82, 168, 255),
+                border:
+                    Border.all(color: const Color.fromARGB(210, 127, 181, 226)),
                 //making borders curved
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(30),
@@ -191,7 +192,7 @@ class _MessageCardState extends State<MessageCard> {
                   _OptionItem(
                       icon: const Icon(Icons.copy_all_rounded,
                           color: Colors.blue, size: 26),
-                      name: 'Copy Text',
+                      name: 'Sao chép văn bản',
                       onTap: () async {
                         await Clipboard.setData(
                                 ClipboardData(text: widget.message.msg))
@@ -199,7 +200,7 @@ class _MessageCardState extends State<MessageCard> {
                           //for hiding bottom sheet
                           Navigator.pop(context);
 
-                          Dialogs.showSnackbar(context, 'Text Copied!');
+                          Dialogs.showSnackbar(context, 'Đã sao chép văn bản!');
                         });
                       })
                   :
@@ -207,18 +208,18 @@ class _MessageCardState extends State<MessageCard> {
                   _OptionItem(
                       icon: const Icon(Icons.download_rounded,
                           color: Colors.blue, size: 26),
-                      name: 'Save Image',
+                      name: 'Lưu ảnh',
                       onTap: () async {
                         try {
                           log('Image Url: ${widget.message.msg}');
                           await GallerySaver.saveImage(widget.message.msg,
-                                  albumName: 'We Chat')
+                                  albumName: 'Hà Nội Bay')
                               .then((success) {
                             //for hiding bottom sheet
                             Navigator.pop(context);
                             if (success != null && success) {
                               Dialogs.showSnackbar(
-                                  context, 'Image Successfully Saved!');
+                                  context, 'Ảnh đã lưu thành công!');
                             }
                           });
                         } catch (e) {
@@ -238,7 +239,7 @@ class _MessageCardState extends State<MessageCard> {
               if (widget.message.type == Type.text && isMe)
                 _OptionItem(
                     icon: const Icon(Icons.edit, color: Colors.blue, size: 26),
-                    name: 'Edit Message',
+                    name: 'Sửa tin nhắn',
                     onTap: () {
                       //for hiding bottom sheet
                       Navigator.pop(context);
@@ -251,12 +252,16 @@ class _MessageCardState extends State<MessageCard> {
                 _OptionItem(
                     icon: const Icon(Icons.delete_forever,
                         color: Colors.red, size: 26),
-                    name: 'Delete Message',
-                    onTap: () async {
-                      await APIs.deleteMessage(widget.message).then((value) {
-                        //for hiding bottom sheet
-                        Navigator.pop(context);
-                      });
+                    name: 'Xóa tin nhắn',
+                    onTap: () {
+                      APIs.alertDeletedMessage(
+                        widget.message,
+                      );
+                      Navigator.pop(context);
+                      // await APIs.deleteMessage(widget.message).then((value) {
+                      //   //for hiding bottom sheet
+                      //   Navigator.pop(context);
+                      // });
                     }),
 
               //separator or divider
@@ -270,15 +275,15 @@ class _MessageCardState extends State<MessageCard> {
               _OptionItem(
                   icon: const Icon(Icons.remove_red_eye, color: Colors.blue),
                   name:
-                      'Sent At: ${MyDateUtil.getMessageTime(context: context, time: widget.message.sent)}',
+                      'Gửi vào: ${MyDateUtil.getMessageTime(context: context, time: widget.message.sent)}',
                   onTap: () {}),
 
               //read time
               _OptionItem(
                   icon: const Icon(Icons.remove_red_eye, color: Colors.green),
                   name: widget.message.read.isEmpty
-                      ? 'Read At: Not seen yet'
-                      : 'Read At: ${MyDateUtil.getMessageTime(context: context, time: widget.message.read)}',
+                      ? 'Đọc lúc: Chưa đọc'
+                      : 'Đọc lúc: ${MyDateUtil.getMessageTime(context: context, time: widget.message.read)}',
                   onTap: () {}),
             ],
           );
@@ -299,14 +304,14 @@ class _MessageCardState extends State<MessageCard> {
                   borderRadius: BorderRadius.circular(20)),
 
               //title
-              title: Row(
-                children: const [
+              title: const Row(
+                children: [
                   Icon(
                     Icons.message,
                     color: Colors.blue,
                     size: 28,
                   ),
-                  Text(' Update Message')
+                  Text(' Sửa tin nhắn')
                 ],
               ),
 
@@ -329,7 +334,7 @@ class _MessageCardState extends State<MessageCard> {
                       Navigator.pop(context);
                     },
                     child: const Text(
-                      'Cancel',
+                      'Hủy',
                       style: TextStyle(color: Colors.blue, fontSize: 16),
                     )),
 
@@ -341,7 +346,7 @@ class _MessageCardState extends State<MessageCard> {
                       APIs.updateMessage(widget.message, updatedMsg);
                     },
                     child: const Text(
-                      'Update',
+                      'Cập nhật',
                       style: TextStyle(color: Colors.blue, fontSize: 16),
                     ))
               ],

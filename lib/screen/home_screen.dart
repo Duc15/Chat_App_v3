@@ -57,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       //for hiding keyboard when a tap is detected on screen
       onTap: () => FocusScope.of(context).unfocus(),
+      // ignore: deprecated_member_use
       child: WillPopScope(
         //if search is on & back button is pressed then close search
         //or else simple close current screen on back button click
@@ -77,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: _isSearching
                 ? TextField(
                     decoration: const InputDecoration(
-                        border: InputBorder.none, hintText: 'Name, Email, ...'),
+                        border: InputBorder.none, hintText: 'Tên, Email, ...'),
                     autofocus: true,
                     style: const TextStyle(fontSize: 17, letterSpacing: 0.5),
                     //when search text changes then updated search list
@@ -96,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     },
                   )
-                : const Text('We Chat'),
+                : const Text('Hà Nội Bay'),
             actions: [
               //search user button
               IconButton(
@@ -183,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 });
                           } else {
                             return const Center(
-                              child: Text('No Connections Found!',
+                              child: Text('Không tìm thấy liên hệ nào!',
                                   style: TextStyle(fontSize: 20)),
                             );
                           }
@@ -212,14 +213,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(20)),
 
               //title
-              title: Row(
-                children: const [
+              title: const Row(
+                children: [
                   Icon(
                     Icons.person_add,
                     color: Colors.blue,
                     size: 28,
                   ),
-                  Text('  Add User')
+                  Text('Thêm người dùng')
                 ],
               ),
 
@@ -228,7 +229,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 maxLines: null,
                 onChanged: (value) => email = value,
                 decoration: InputDecoration(
-                    hintText: 'Email Id',
+                    hintText: 'Email',
                     prefixIcon: const Icon(Icons.email, color: Colors.blue),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15))),
@@ -242,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       //hide alert dialog
                       Navigator.pop(context);
                     },
-                    child: const Text('Cancel',
+                    child: const Text('Hủy',
                         style: TextStyle(color: Colors.blue, fontSize: 16))),
 
                 //add button
@@ -254,13 +255,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         await APIs.addChatUser(email).then((value) {
                           if (!value) {
                             Dialogs.showSnackbar(
-                                context, 'User does not Exists!');
+                                context, 'Người dùng không tồn tại rùi!');
                           }
                         });
                       }
                     },
                     child: const Text(
-                      'Add',
+                      'Thêm',
                       style: TextStyle(color: Colors.blue, fontSize: 16),
                     ))
               ],

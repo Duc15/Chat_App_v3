@@ -23,7 +23,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  // ignore: use_key_in_widget_constructors
+  const MyApp({key});
 
   @override
   Widget build(BuildContext context) {

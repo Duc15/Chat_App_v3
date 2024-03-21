@@ -34,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Profile Screen',
+            'Trang cá nhân',
           ),
         ),
         floatingActionButton: Padding(
@@ -59,8 +59,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             backgroundColor: Colors.red,
             icon: const Icon(
               Icons.logout,
+              color: Colors.white,
             ),
-            label: const Text('Đăng xuất'),
+            label: const Text(
+              'Đăng xuất',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
         body: Form(
@@ -227,7 +231,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 EdgeInsets.only(top: mq.height * .03, bottom: mq.height * .05),
             children: [
               const Text(
-                'Pick Profile Picture',
+                'Chọn 1 bức ảnh đại diện',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
               ),

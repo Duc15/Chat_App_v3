@@ -344,4 +344,11 @@ class APIs {
         .doc(message.sent)
         .update({'msg': updatedMsg});
   }
+
+  static Future<void> alertDeletedMessage(Message message) async {
+    await firestore
+        .collection('chats/${getConversationID(message.toId)}/messages/')
+        .doc(message.sent)
+        .update({'msg': 'Tin nhắn đã bị gỡ'});
+  }
 }

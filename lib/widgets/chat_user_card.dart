@@ -75,7 +75,7 @@ class _ChatUserCardState extends State<ChatUserCard> {
                 subtitle: Text(
                     _message != null
                         ? _message!.type == Type.image
-                            ? 'image'
+                            ? 'Hình ảnh'
                             : _message!.msg
                         : widget.user.about,
                     maxLines: 1),
